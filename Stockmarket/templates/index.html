@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Growth Prediction</title>
+  <style>
+    /* Global styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7f6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    h1 {
+      color: #2c3e50;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 1rem;
+      margin-right: 10px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1rem;
+      width: 250px;
+      margin-right: 10px;
+      border: 1px solid #bdc3c7;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: #fff;
+      background-color: #3498db;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    pre {
+      background-color: #ffffff;
+      color: #333;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid #bdc3c7;
+      width: 80%;
+      margin-top: 20px;
+      font-size: 1.1rem;
+      white-space: pre-wrap; /* Ensure text wraps inside the container */
+      word-wrap: break-word;
+    }
+
+    /* Style for error messages */
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Stock Growth Prediction</h1>
+  <form id="predictionForm">
+    <label for="company">Enter Company Ticker (e.g., AAPL, GOOGL, MSFT):</label><br>
+    <input type="text" id="company" name="company" required><br><br>
+    <button type="submit">Predict</button>
+  </form>
+  <pre id="result"></pre>
+
+  <script>
+    document.getElementById('predictionForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const company = document.getElementById('company').value;
+      try {
+        const response = await fetch('/predict', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ company: company })
+        });
+        const data = await response.json();
+        if(data.error) {
+          document.getElementById('result').innerText = 'Error: ' + data.error;
+          document.getElementById('result').classList.add('error');
+        } else {
+          document.getElementById('result').innerText = `
+Company: ${data.company}
+Last Price: ${data.last_price}
+Predicted Price: ${data.predicted_price}
+Growth: ${data.growth}
+Trend: ${data.trend}`;
+          document.getElementById('result').classList.remove('error');
+        }
+      } catch (err) {
+        document.getElementById('result').innerText = 'An error occurred.';
+        document.getElementById('result').classList.add('error');
+      }
+    });
+  </script>
+</body>
+</html>
