@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Market Trend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6e6e6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #bdc3c7;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #bdc3c7;
+            color: white;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #95a5a6;
+        }
+
+        #result {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            width: 300px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        async function getMarketTrend() {
+            const response = await fetch('/market_trend');
+            const data = await response.json();
+            document.getElementById('result').innerText = data.movement ? `Market is going ${data.movement}` : "Error fetching data.";
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <h1>Silver Market Trend</h1>
+        <button onclick="getMarketTrend()">Check Trend</button>
+        <p id="result"></p>
+    </div>
+</body>
+</html>
