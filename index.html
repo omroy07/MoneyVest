@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MoneyVest</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .overview-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 30px auto;
+    }
+
+    .card {
+      background-color: #1F1B24;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      color: #E0E0E0;
+      text-decoration: none;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background-color 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      background-color: #3700B3;
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #BB86FC;
+      text-align: center;
+    }
+
+    .card p {
+      font-size: 1rem;
+      text-align: center;
+      line-height: 1.4;
+      color: #ccc;
+      flex-grow: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>📊 MoneyVest</h1>
+    <nav>
+      <ul>
+        <li><a href="Dashboard/dashboard.html">Dashboard</a></li>
+        <li><a href="SIP/sip.html">SIP</a></li>
+        <li><a href="MutualFund/mutualfund.html">Mutual Fund</a></li>
+        <li><a href="Fixed Deposit/templates/index.html">Fixed Deposit</a></li>
+        <li><a href="Gold/gold.html">Gold</a></li>
+        <li><a href="Gold_Prediction/templates/index.html">Gold Prediction</a></li>
+        <li><a href="Silver/silver.html">Silver</a></li>
+        <li><a href="Silver_Prediction/templates/index.html">Silver Prediction</a></li>
+        <li><a href="Stock/stocks.html">Stocks</a></li>
+        <li><a href="Stock_Prediction/templates/index.html">Stock Prediction</a></li>
+        <li><a href="Expense/expense.html">Expense</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="overview-cards">
+
+      <a href="Dashboard/dashboard.html" class="card">
+        <img src="https://img.icons8.com/fluency/96/dashboard.png" alt="Dashboard Icon" />
+        <h3>Dashboard</h3>
+        <p>Overview of all your financial activities – SIPs, funds, assets, and expenses in one place.</p>
+      </a>
+
+      <a href="SIP/sip.html" class="card">
+        <img src="https://img.icons8.com/fluency/96/investment.png" alt="SIP Icon" />
+        <h3>Systematic Investment Plan (SIP)</h3>
+        <p>Plan your investments systematically with SIPs to build wealth gradually with discipline and market benefits.
+        </p>
+      </a>
+
+      <a href="MutualFund/mutualfund.html" class="card">
+        <img src="https://img.icons8.com/fluency/96/combo-chart.png" alt="Mutual Fund Icon" />
+        <h3>Mutual Funds</h3>
+        <p>Explore diversified portfolios managed by professionals, helping you invest in stocks, bonds, and other
+          securities.</p>
+      </a>
+
+      <a href="http://127.0.0.1:5503" class="card">
+        <img src="https://img.icons8.com/fluency/96/money-box.png" alt="Fixed Deposit Icon" />
+        <h3>Fixed Deposits</h3>
+        <p>Explore interest rates for fixed deposits, calculate potential returns, and compare different FD schemes to
+          find the best option for your savings.</p>
+      </a>
+
+      <a href="Gold/gold.html" class="card">
+        <img src="https://img.icons8.com/fluency/96/gold-bars.png" alt="Gold Icon" />
+        <h3>Gold</h3>
+        <p>Track gold prices, manage your holdings, and invest safely in one of the most valuable assets across
+          generations.</p>
+      </a>
+
+      <a href="http://127.0.0.1:5501" class="card">
+        <img src="https://img.icons8.com/fluency/96/gold-bars.png" alt="Gold Bars Icon" />
+        <h3>Gold Prediction</h3>
+        <p>Forecast the future price of gold, track market sentiment, and determine whether its value is predicted to
+          rise or fall.</p>
+      </a>
+
+      <a href="Silver/silver.html" class="card">
+        <img src="https://img.icons8.com/fluency/96/coins.png" alt="Silver Icon" />
+        <h3>Silver</h3>
+        <p>Stay updated with silver market trends, add your holdings, and calculate the total value instantly.</p>
+      </a>
+
+      <a href="http://127.0.0.1:5502" class="card">
+        <img src="https://img.icons8.com/fluency/96/silver-bars.png" alt="Silver Bars Icon" />
+        <h3>Silver Prediction</h3>
+        <p>Anticipate changes in silver prices, monitor market volatility, and get predictions on whether its value is
+          expected to increase or decrease.</p>
+      </a>
+
+      <a href="Stock/stocks.html" class="card">
+        <img src="https://img.icons8.com/fluency/96/line-chart.png" alt="Stocks Icon" />
+        <h3>Stocks</h3>
+        <p>Manage your stock portfolio, add shares and prices, and track the total market value with ease.</p>
+      </a>
+
+      <a href="http://127.0.0.1:5000" class="card">
+        <img src="https://img.icons8.com/fluency/96/bullish.png" alt="Stock Market Icon" />
+        <h3>Stock Prediction</h3>
+        <p>Predict stock movements, analyze market trends, and make informed investment decisions based on whether
+          stocks are likely to go up or down.</p>
+      </a>
+
+      <a href="Expense/expense.html" class="card">
+        <img src="https://img.icons8.com/fluency/96/wallet.png" alt="Expense Icon" />
+        <h3>Expense Tracker</h3>
+        <p>Monitor your daily expenses, categorize your spending, and keep your budget on track effortlessly.</p>
+      </a>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MoneyVest. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
