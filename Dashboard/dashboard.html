@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MoneyVest Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>MoneyVest</h1>
+    <nav>
+      <ul>
+        <li><a href="sip.html">SIP</a></li>
+        <li><a href="mutualfund.html">Mutual Fund</a></li>
+        <li><a href="silver.html">Silver</a></li>
+        <li><a href="gold.html">Gold</a></li>
+        <li><a href="stocks.html">Stocks</a></li>
+        <li><a href="expense.html">Expense</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="inputs">
+      <h2>Enter Your Investments</h2>
+      <div class="form-grid" id="formGrid"></div>
+    </section>
+
+    <section class="overview-cards" id="cardsGrid"></section>
+
+    <section class="charts">
+      <canvas id="portfolioChart" width="400" height="400"></canvas>
+    </section>
+  </main>
+
+  <footer>&copy; 2025 MoneyVest</footer>
+
+  <script src="dashboard.js"></script>
+</body>
+
+</html>
