@@ -1,0 +1,72 @@
+/* Expense Tracker Styles */
+.expense-section {
+  max-width: 500px;
+  margin: 30px auto;
+  background-color: #222;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  color: #ddd;
+}
+
+.expense-section h2 {
+  margin-bottom: 15px;
+  color: #bb86fc;
+  text-align: center;
+}
+
+.expense-section form {
+  display: grid;
+  gap: 15px;
+}
+
+.expense-section label {
+  font-weight: 600;
+  color: #bb86fc;
+}
+
+.expense-section input[type="text"],
+.expense-section input[type="number"],
+.expense-section input[type="date"] {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1em;
+}
+
+.expense-section button {
+  background-color: #bb86fc;
+  color: #121212;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.expense-section button:hover {
+  background-color: #9f63e4;
+}
+
+#expenseList {
+  margin-top: 20px;
+  list-style-type: none;
+  padding-left: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  border-top: 1px solid #444;
+}
+
+#expenseList li {
+  padding: 10px;
+  border-bottom: 1px solid #444;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  color: #eee;
+}
+
+#expenseList li span.amount {
+  color: #4caf50; /* Green for positive numbers */
+}
