@@ -1,0 +1,74 @@
+/* Silver Tracker Styles */
+.silver-section {
+  max-width: 500px;
+  margin: 30px auto;
+  background-color: #222;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  color: #ddd;
+}
+
+.silver-section h2 {
+  margin-bottom: 15px;
+  color: #bb86fc;
+  text-align: center;
+}
+
+.silver-section form {
+  display: grid;
+  gap: 15px;
+}
+
+.silver-section label {
+  font-weight: 600;
+  color: #bb86fc;
+}
+
+.silver-section input[type="number"] {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1em;
+}
+
+.silver-section button {
+  background-color: #bb86fc;
+  color: #121212;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.silver-section button:hover {
+  background-color: #9f63e4;
+}
+
+#silverList {
+  margin-top: 20px;
+  list-style-type: none;
+  padding-left: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  border-top: 1px solid #444;
+}
+
+#silverList li {
+  padding: 10px;
+  border-bottom: 1px solid #444;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  color: #eee;
+}
+
+.total-value {
+  margin-top: 20px;
+  text-align: center;
+  color: #bb86fc;
+  font-weight: 700;
+  font-size: 1.3em;
+}
