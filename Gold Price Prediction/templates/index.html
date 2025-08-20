@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gold Price Prediction (INR)</title>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c1810 0%, #4a2c17 50%, #6b3e1f 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Golden particles background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255,215,0,0.2), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,223,0,0.15), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255,193,7,0.25), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,215,0,0.18), transparent),
+                radial-gradient(2px 2px at 160px 30px, rgba(255,223,0,0.22), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            z-index: 1;
+            pointer-events: none;
+            animation: goldSparkle 6s linear infinite;
+        }
+
+        @keyframes goldSparkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 
+                0 25px 50px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,215,0,0.1);
+            position: relative;
+            z-index: 2;
+            border: 2px solid rgba(255,215,0,0.3);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ffd700, #ffb700, #ffc107, #ffd700);
+            border-radius: 25px;
+            z-index: -1;
+            animation: goldenBorder 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes goldenBorder {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 0.9; transform: scale(1.01); }
+        }
+
+        h2 {
+            text-align: center;
+            color: #8b4513;
+            margin-bottom: 35px;
+            font-size: 2.8em;
+            font-weight: 300;
+            position: relative;
+            text-shadow: 3px 3px 6px rgba(139,69,19,0.3);
+            background: linear-gradient(135deg, #ffd700, #b8860b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2::before {
+            content: '🏆';
+            margin-right: 15px;
+            font-size: 0.9em;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+            -webkit-text-fill-color: initial;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ffd700, #b8860b, #ffd700, transparent);
+            border-radius: 2px;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        form {
+            background: linear-gradient(135deg, rgba(255,248,220,0.9), rgba(255,245,205,0.8));
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                inset 0 2px 20px rgba(255,215,0,0.1),
+                0 8px 25px rgba(0,0,0,0.1);
+            border: 2px solid rgba(255,215,0,0.2);
+            position: relative;
+        }
+
+        form::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #ffd700, #b8860b);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.2); opacity: 0.3; }
+        }
+
+        label {
+            display: block;
+            color: #8b4513;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            text-shadow: 1px 1px 2px rgba(255,215,0,0.3);
+        }
+
+        input {
+            width: 100%;
+            padding: 18px;
+            margin: 5px 0 20px;
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,248,220,0.9));
+            color: #8b4513;
+            font-weight: 500;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 
+                0 0 0 4px rgba(255,215,0,0.2),
+                0 8px 25px rgba(255,215,0,0.3);
+            transform: translateY(-3px);
+            background: rgba(255,255,255,1);
+        }
+
+        input:hover {
+            border-color: #ffb700;
+            transform: translateY(-1px);
+        }
+
+        input::placeholder {
+            color: rgba(139,69,19,0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffd700 0%, #b8860b 50%, #daa520 100%);
+            color: #8b4513;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.4s ease;
+            box-shadow: 
+                0 8px 25px rgba(255,215,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+            position: relative;
+            overflow: hidden;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            transition: left 0.6s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 12px 35px rgba(255,215,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.4);
+            background: linear-gradient(135deg, #ffed4e 0%, #daa520 50%, #ffd700 100%);
+        }
+
+        button:active {
+            transform: translateY(-2px);
+        }
+
+        table {
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.98);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 
+                0 15px 40px rgba(0,0,0,0.15),
+                0 0 0 2px rgba(255,215,0,0.2);
+            border: 2px solid rgba(255,215,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
+            color: #8b4513;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 25px;
+            position: relative;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
+        }
+
+        th::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+        }
+
+        td {
+            border: 1px solid rgba(255,215,0,0.1);
+            padding: 20px 25px;
+            text-align: center;
+            font-size: 16px;
+            color: #8b4513;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            background: rgba(255,248,220,0.1);
+        }
+
+        tbody tr:hover {
+            background: rgba(255,215,0,0.08);
+            transform: scale(1.01);
+        }
+
+        tbody tr:nth-child(even) {
+            background: rgba(255,248,220,0.05);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        canvas {
+            margin-top: 40px;
+            border-radius: 18px;
+            box-shadow: 
+                0 15px 40px rgba(0,0,0,0.15),
+                0 0 0 2px rgba(255,215,0,0.2);
+            border: 2px solid rgba(255,215,0,0.1);
+            background: rgba(255,255,255,0.98);
+        }
+
+        /* Golden decorative elements */
+        .gold-ornament {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #fff8dc, #ffd700, #b8860b);
+            border-radius: 50%;
+            box-shadow: 
+                inset 0 0 30px rgba(255,255,255,0.4),
+                0 8px 20px rgba(255,215,0,0.3);
+            opacity: 0.15;
+        }
+
+        .gold-ornament-1 {
+            top: 30px;
+            right: 60px;
+            animation: goldFloat 8s ease-in-out infinite;
+        }
+
+        .gold-ornament-2 {
+            bottom: 40px;
+            left: 40px;
+            animation: goldFloat 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes goldFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1); 
+                opacity: 0.15;
+            }
+            33% { 
+                transform: translateY(-15px) rotate(120deg) scale(1.1); 
+                opacity: 0.25;
+            }
+            66% { 
+                transform: translateY(-25px) rotate(240deg) scale(0.9); 
+                opacity: 0.2;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 25px 0;
+            color: #b8860b;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #ffd700;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: goldSpin 1s linear infinite;
+            margin-left: 12px;
+        }
+
+        @keyframes goldSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Rupee symbol styling */
+        .rupee {
+            color: #b8860b;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(255,215,0,0.3);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 25px;
+            }
+            
+            h2 {
+                font-size: 2.2em;
+            }
+            
+            input, button {
+                font-size: 16px;
+            }
+            
+            form {
+                padding: 25px;
+            }
+            
+            th, td {
+                padding: 15px 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gold-ornament gold-ornament-1"></div>
+    <div class="gold-ornament gold-ornament-2"></div>
+    
+    <div class="container">
+        <h2>Gold Price Prediction (INR)</h2>
+        <form id="predictionForm">
+            <label>💰 Current Price (₹):</label>
+            <input type="number" step="0.01" name="price" required placeholder="Enter current gold price in INR">
+            
+            <label>📊 Open (₹):</label>
+            <input type="number" step="0.01" name="open" required placeholder="Opening price in INR">
+            
+            <label>📈 High (₹):</label>
+            <input type="number" step="0.01" name="high" required placeholder="Highest price in INR">
+            
+            <label>📉 Low (₹):</label>
+            <input type="number" step="0.01" name="low" required placeholder="Lowest price in INR">
+            
+            <label>📦 Volume:</label>
+            <input type="number" step="0.01" name="volume" required placeholder="Trading volume">
+            
+            <label>📊 Change %:</label>
+            <input type="number" step="0.01" name="chg_percent" required placeholder="Percentage change">
+            
+            <button type="submit">🔮 Predict Gold Price</button>
+        </form>
+        
+        <div class="loading" id="loading">Analyzing gold market trends...</div>
+        
+        <table id="resultsTable" style="display:none;">
+            <thead>
+                <tr>
+                    <th>📅 Date</th>
+                    <th>🏆 Predicted Price (₹)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        
+        <canvas id="predictionChart" style="display:none;" height="100"></canvas>
+    </div>
+
+<script>
+let chartInstance = null;
+
+document.getElementById('predictionForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Show loading animation
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('resultsTable').style.display = 'none';
+    document.getElementById('predictionChart').style.display = 'none';
+    
+    const formData = new FormData(this);
+    
+    fetch('/predict', { 
+        method: 'POST', 
+        body: formData 
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Hide loading animation
+        document.getElementById('loading').style.display = 'none';
+        
+        const table = document.getElementById('resultsTable');
+        const tbody = table.querySelector('tbody');
+        tbody.innerHTML = '';
+        
+        const labels = [];
+        const prices = [];
+        
+        data.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${row.date}</td><td><span class="rupee">₹${parseFloat(row.predicted_price).toFixed(2)}</span></td>`;
+            tbody.appendChild(tr);
+            
+            labels.push(row.date);
+            prices.push(row.predicted_price);
+        });
+        
+        table.style.display = 'table';
+        
+        const ctx = document.getElementById('predictionChart').getContext('2d');
+        document.getElementById('predictionChart').style.display = 'block';
+        
+        if (chartInstance) chartInstance.destroy();
+        
+        chartInstance = new Chart(ctx, { 
+            type: 'line', 
+            data: { 
+                labels, 
+                datasets: [{ 
+                    label: 'Predicted Price (₹)', 
+                    data: prices, 
+                    borderColor: '#ffd700', 
+                    backgroundColor: 'rgba(255,215,0,0.1)', 
+                    fill: true, 
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#b8860b',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 8,
+                    borderWidth: 3
+                }] 
+            }, 
+            options: { 
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: '#8b4513',
+                            font: {
+                                size: 14,
+                                weight: '600'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(255,215,0,0.95)',
+                        titleColor: '#8b4513',
+                        bodyColor: '#8b4513',
+                        borderColor: '#b8860b',
+                        borderWidth: 2,
+                        cornerRadius: 10,
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                return 'Predicted Price: ₹' + parseFloat(context.parsed.y).toFixed(2);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: '📅 Date',
+                            color: '#8b4513',
+                            font: {
+                                size: 14,
+                                weight: '600'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255,215,0,0.2)'
+                        },
+                        ticks: {
+                            color: '#8b4513'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: '💰 Price (₹)',
+                            color: '#8b4513',
+                            font: {
+                                size: 14,
+                                weight: '600'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255,215,0,0.2)'
+                        },
+                        ticks: {
+                            color: '#8b4513',
+                            callback: function(value) {
+                                return '₹' + value.toFixed(2);
+                            }
+                        }
+                    }
+                },
+                elements: {
+                    point: {
+                        hoverBorderWidth: 3
+                    }
+                }
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('loading').style.display = 'none';
+        alert('Error occurred while predicting gold prices. Please try again.');
+    });
+});
+</script>
+</body>
+</html>
