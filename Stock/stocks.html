@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stocks Tracker - MoneyVest</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="stocks.css" />
+</head>
+
+<body>
+  <header>
+    <h1>📊 Stocks Tracker</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sip.html">SIP</a></li>
+        <li><a href="mutualfund.html">Mutual Fund</a></li>
+        <li><a href="gold.html">Gold</a></li>
+        <li><a href="silver.html">Silver</a></li>
+        <li><a href="expense.html">Expense</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="stocks-section">
+      <h2>Add Your Stock Holdings</h2>
+      <form id="stocksForm" aria-label="Add Stock Holdings Form">
+        <label for="stockName">Stock Name / Symbol:</label>
+        <input type="text" id="stockName" placeholder="e.g. AAPL" required />
+
+        <label for="stockShares">Number of Shares:</label>
+        <input type="number" id="stockShares" min="1" placeholder="e.g. 50" required />
+
+        <label for="stockPrice">Price per Share (₹):</label>
+        <input type="number" id="stockPrice" min="0" step="0.01" placeholder="e.g. 1500.50" required />
+
+        <button type="submit">Add Holding</button>
+      </form>
+
+      <h2>Stock Holdings</h2>
+      <ul id="stocksList" aria-live="polite" aria-label="List of Stock Holdings"></ul>
+
+      <div class="total-value">
+        <h3>Total Stocks Value: ₹<span id="stocksTotalValue">0.00</span></h3>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MoneyVest. All rights reserved.</p>
+  </footer>
+
+  <script src="stocks.js"></script>
+</body>
+
+</html>
