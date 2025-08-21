@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mutual Fund - MoneyVest</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="mutualfund.css" />
+</head>
+
+<body>
+  <header>
+    <h1>💼 Mutual Fund</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sip.html">SIP</a></li>
+        <li><a href="gold.html">Gold</a></li>
+        <li><a href="silver.html">Silver</a></li>
+        <li><a href="stocks.html">Stocks</a></li>
+        <li><a href="expense.html">Expense</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="charts">
+      <h2>Mutual Fund Overview</h2>
+      <p>Explore and manage your mutual fund investments here.</p>
+
+      <div class="calculator" aria-label="Mutual Fund Calculator">
+        <h3>Mutual Fund Returns Calculator</h3>
+        <label for="initialInvestment">Initial Investment Amount (₹):</label>
+        <input type="number" id="initialInvestment" placeholder="e.g. 50000" min="1" />
+
+        <label for="annualContribution">Annual Contribution (₹):</label>
+        <input type="number" id="annualContribution" placeholder="e.g. 10000" min="0" />
+
+        <label for="mfAnnualReturn">Expected Annual Return Rate (%):</label>
+        <input type="number" id="mfAnnualReturn" placeholder="e.g. 10" min="0" step="0.1" />
+
+        <label for="mfDuration">Investment Duration (years):</label>
+        <input type="number" id="mfDuration" placeholder="e.g. 10" min="1" />
+
+        <button id="mfCalculateBtn">Calculate</button>
+
+        <div id="mfResult" class="result" style="display:none;"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MoneyVest. All rights reserved.</p>
+  </footer>
+
+  <script src="mutualfund.js"></script>
+</body>
+
+</html>
