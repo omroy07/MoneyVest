@@ -60,9 +60,6 @@ MoneyVest/
 ├── index.html
 └── style.css
 ```
-
-*(Update this structure as needed to match your actual project files and directories.)*
-
 ---
 
 ##  Getting Started
@@ -79,8 +76,20 @@ MoneyVest/
 3. **Explore the project**:
    Open index.html in your browser to explore the frontend. For backend setup, refer to additional instructions if available.
 
-   ---
-   
+---
+
+##  Contributors
+
+| Name                          | Role                                                        |
+|-------------------------------|-------------------------------------------------------------|
+| **Om Roy** (@omroy07)         | Project Admin & Machine Learning Engineer – overseeing overall development, administrative tasks, and ML features |
+| **Kanisha Ravindra Sharma** (@KanishaSharma11) | Machine Learning Engineer – focused on ML development |
+
+
+
+*Feel free to replace “[Another ML Developer]” with the actual name and GitHub handle when available.*
+
+---
 ---
 
 ### Suggestions to Improve It Further
