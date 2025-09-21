@@ -82,8 +82,8 @@ MoneyVest/
 
 | Name                          | Role                                                        |
 |-------------------------------|-------------------------------------------------------------|
-| **Om Roy** (@omroy07)         | Project Admin & Machine Learning Engineer – overseeing overall development, administrative tasks, and ML features |
-| **Kanisha Ravindra Sharma** (@KanishaSharma11) | Machine Learning Engineer – focused on ML development |
+| **Om Roy** ([@omroy07](https://github.com/omroy07))         | Project Admin & Machine Learning Engineer – overseeing overall development, administrative tasks, and ML features |
+| **Kanisha Ravindra Sharma** ([@KanishaSharma11](https://github.com/KanishaSharma11)) | Machine Learning Engineer – focused on ML development |
 
 ---
 
@@ -99,6 +99,6 @@ MoneyVest/
 | **Contributing Guidelines** | Optional: add a `CONTRIBUTING.md` for more structured collaboration |
 
 Let me know if you’d like help drafting those additional sections or tailoring the README to your project's specifics—happy to assist further!
-::contentReference[oaicite:0]{index=0}
+
 
 
